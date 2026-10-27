@@ -1,11 +1,11 @@
 using System.ComponentModel;
 
-namespace selecoes;
+namespace Selecoes;
 
 public partial class Form1 : Form
 {
     private List<string> listaCidade = ["Vitória", "Vila Velha", "Serra", "Cariacica", "Viana", "Guarapari", "Fundão"];
-    private BindingList<Cadastro> listaCadastros = [];
+    private BindingList<Cadastro> listaCadastros = new BindingList<Cadastro>(BD.RecuperarCadastros());
 
     public Form1()
     {
@@ -49,21 +49,10 @@ public partial class Form1 : Form
         if (chkNoturno.Checked) novoCadastro.Turnos.Add("Noturno");
         novoCadastro.DataTermoAceito = DateTime.Now.AddDays(2);
         listaCadastros.Add(novoCadastro);
+        BD.InserirCadastro(novoCadastro);
     }
 
-    public class Cadastro
-    {
-        public string Cidade { get; set; }
-        public List<string> Turnos { get; set; } = [];
-        public DateTime DataTermoAceito { get; set; }
-        public string TurnosString
-        {
-            get
-            {
-                return string.Join(", ", Turnos);
-            }
-        }
-    }
+    
 
     private void cmbCidade_SelectedIndexChanged(object sender, EventArgs e)
     {

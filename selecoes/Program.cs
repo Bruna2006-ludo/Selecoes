@@ -1,4 +1,4 @@
-namespace selecoes;
+namespace Selecoes;
 
 static class Program
 {
